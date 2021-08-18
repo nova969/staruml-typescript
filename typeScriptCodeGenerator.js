@@ -546,7 +546,7 @@ class TypeScriptCodeGenerator {
             this.writeDoc(codeWriter, doc, options);
 
             // modifiers
-            if (!elem._parent instanceof type.UMLInterface) {
+            if (!(elem._parent instanceof type.UMLInterface)) {
                 var _modifiers = this.getModifiers(elem);
                 if (_modifiers.length > 0) {
                     terms.push(_modifiers.join(" "));
@@ -577,7 +577,7 @@ class TypeScriptCodeGenerator {
             }
 
             // body
-            if (skipBody === true || _modifiers.includes("abstract")) {
+            if (skipBody === true ||  typeof _modifiers === "string" && _modifiers.includes("abstract")) {
                 codeWriter.writeLine(terms.join(" ") + ";");
             } else {
                 codeWriter.writeLine(terms.join(" ") + " {");
@@ -587,28 +587,39 @@ class TypeScriptCodeGenerator {
                 // return statement
                 if (returnParam) {
                     var returnType = this.getType(returnParam);
-                    if (returnType === "bool") {
-                        codeWriter.writeLine("return False;");
+                    if (returnType === "bool" ||
+                        returnType === "boolean") {
+                        codeWriter.writeLine("return false;");
+
                     } else if (returnType === "byte" ||
                         returnType === "int" ||
+                        returnType === "number" ||
+                        returnType === "bigint" ||
                         returnType === "sbyte" ||
                         returnType === "short" ||
                         returnType === "uint" ||
                         returnType === "ulong" ||
                         returnType === "ushort") {
                         codeWriter.writeLine("return 0;");
+
                     } else if (returnType === "float") {
                         codeWriter.writeLine("return 0.0F;");
+
                     } else if (returnType === "double") {
                         codeWriter.writeLine("return 0.0D;");
+
                     } else if (returnType === "long") {
                         codeWriter.writeLine("return 0.0L;");
+
                     } else if (returnType === "decimal") {
                         codeWriter.writeLine("return 0.0M;");
+
                     } else if (returnType === "char") {
                         codeWriter.writeLine("return '\\0';");
+
                     } else if (returnType === "string") {
                         codeWriter.writeLine('return "";');
+                        
                     } else {
                         codeWriter.writeLine("return null;");
                     }
@@ -674,7 +685,7 @@ class TypeScriptCodeGenerator {
 
             // modifiers
             console.log('writemember', 'elem', elem, elem._parent instanceof type.UMLInterface);
-            if (!elem._parent instanceof type.UMLInterface) {
+            if (!(elem._parent instanceof type.UMLInterface)) {
                 var _modifiers = this.getModifiers(elem);
                 if (_modifiers.length > 0) {
                     terms.push(_modifiers.join(" "));
@@ -830,4 +841,3 @@ function generate(baseModel, basePath, options) {
 }
 
 exports.generate = generate;
-

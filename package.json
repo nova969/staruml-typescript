@@ -1,14 +1,14 @@
 {
-  "name": "robertalmalak.staruml-typescript",
+  "name": "staruml-typescript",
   "title": "TypeScript",
   "description": "TypeScript code generation",
-  "homepage": "https://github.com/qwin/staruml-typescript",
-  "issues": "https://github.com/qwin/staruml-typescript/issues",
+  "homepage": "https://github.com/nova969/staruml-typescript",
+  "issues": "https://github.com/nova969/staruml-typescript/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/qwin/staruml-typescript.git"
+    "url": "https://github.com/nova969/staruml-typescript.git"
   },
-  "version": "0.2.0",
+  "version": "1.0.0",
   "keywords": [
     "TypeScript",
     "ts",
@@ -16,14 +16,11 @@
     "staruml"
   ],
   "author": {
-    "name": "Robert Al Malak",
-    "email": "robertalmalak7@gmail.com",
-    "url": "https://github.com/qwin"
+    "name": "Andreas Behler",
+    "url": "https://github.com/nova969"
   },
   "license": "GPL-3.0",
   "engines": {
-    "staruml": ">=3.0.0"
-  },
-  "devDependencies": {},
-  "dependencies": {}
+    "staruml": ">=4.0.0"
+  }
 }
